@@ -1,59 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basedow.org</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-
-        .container {
-            text-align: center;
-            padding: 2rem;
-        }
-
-        h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-
-        p {
-            font-size: 1.5rem;
-            font-weight: 300;
-            opacity: 0.9;
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 2.5rem;
-            }
-            
-            p {
-                font-size: 1.2rem;
-            }
-        }
-    </style>
+    <title>Basedow.org - Maladie de Basedow : Comprendre et Agir</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Basedow.org</h1>
-        <p>Work in progress</p>
-    </div>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo-container">
+                <img src="logo_basedow.svg" alt="Basedow.org" class="logo">
+                <span class="logo-text">Basedow.org</span>
+            </div>
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#symptomes">Symptômes</a></li>
+                <li><a href="#annuaire">Annuaire</a></li>
+                <li><a href="#ressources">Ressources</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="accueil" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Maladie de Basedow</h1>
+                <p class="hero-subtitle">Palpitations cardiaques, mains qui tremblent, crises d'angoisse, perte de poids, fatigue extrême, yeux exorbités, hypersensibilité à la lumière : <strong>et si c'était Basedow (Graves) ?</strong></p>
+                <a href="#symptomes" class="cta-button">Explorer les symptômes</a>
+            </div>
+            <div class="hero-image">
+                <img src="hero_image_basedow.png" alt="Symptômes oculaires de la maladie de Basedow">
+            </div>
+        </div>
+    </section>
+
+    <!-- Symptoms Section -->
+    <section id="symptomes" class="symptoms-section">
+        <div class="symptoms-container">
+            <h2>Symptômes Courants</h2>
+            
+            <div class="intro-text">
+                <p>Cette maladie auto-immune, affectant en premier lieu la thyroïde, souvent invisible, est encore trop méconnue, ce qui retarde son diagnostic. Elle peut se déclencher du jour au lendemain ou s'immiscer progressivement dans la vie du patient et provoquer des dommages irréparables tant sur le plan physique que psychologique ou encore esthétique. Face au manque d'information, de reconnaissance et de soutien, nous avons créé ce site pour offrir un lieu de compréhension, d'accompagnement et de solidarité.</p>
+            </div>
+
+            <div class="symptoms-grid">
+                <div class="symptom-category">
+                    <h3>Symptômes Physiques</h3>
+                    <ul>
+                        <li>Goitre</li>
+                        <li>Perte de poids</li>
+                        <li>Tremblements</li>
+                        <li>Fatigue musculaire</li>
+                        <li>Palpitations cardiaques</li>
+                        <li>Crises d'angoisse</li>
+                        <li>Fatigue extrême</li>
+                    </ul>
+                </div>
+
+                <div class="symptom-category">
+                    <h3>Symptômes Oculaires (Orbitopathie)</h3>
+                    <ul>
+                        <li>Yeux exorbités</li>
+                        <li>Sécheresse oculaire</li>
+                        <li>Vision double</li>
+                        <li>Hypersensibilité à la lumière</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Petition Section -->
+    <section class="petition-section">
+        <div class="petition-content">
+            <h2>Faisons Entendre Notre Voix</h2>
+            <p>Notre premier objectif est de faire entendre la voix des malades. Nous vous invitons à soutenir notre démarche en signant la pétition pour une reconnaissance officielle de la maladie de Basedow et de ses répercussions.</p>
+            <p>Ensemble, nous pouvons contribuer à une meilleure visibilité de cette pathologie, encourager la recherche, améliorer la prise en charge et favoriser l'écoute des patients.</p>
+            <a href="https://www.change.org/p/ouvrons-les-yeux-sur-la-maladie-de-basedow?recruiter=162937474&recruited_by_id=d022c41b-4b8c-4179-95a6-e3bccda8db53&utm_source=share_petition&utm_campaign=share_petition&utm_medium=copylink&utm_content=cl_sharecopy_490781443_fr-FR%3A5" target="_blank" rel="noopener noreferrer" class="cta-button-white">Signer la pétition</a>
+        </div>
+    </section>
+
+    <script>
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+    </script>
 </body>
 </html>
