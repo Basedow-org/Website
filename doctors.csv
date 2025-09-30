@@ -1,0 +1,11 @@
+id,name,specialty,address,city,postal_code,latitude,longitude,phone,email,website
+1,Dr. Sophie Martin,Endocrinologue,15 Rue de la Paix,Paris,75002,48.8698,2.3318,01 42 86 82 00,sophie.martin@example.com,
+2,Dr. Jean Dubois,Ophtalmologue,8 Avenue Victor Hugo,Lyon,69003,45.7578,4.8320,04 78 62 75 00,jean.dubois@example.com,
+3,Dr. Marie Lefebvre,Endocrinologue,25 Boulevard Haussmann,Paris,75009,48.8738,2.3332,01 47 70 85 00,marie.lefebvre@example.com,
+4,Dr. Pierre Moreau,Ophtalmologue,12 Rue de la République,Marseille,13001,43.2965,5.3698,04 91 54 92 00,pierre.moreau@example.com,
+5,Dr. Claire Bernard,Endocrinologue,45 Cours Vitton,Lyon,69006,45.7699,4.8533,04 78 24 56 00,claire.bernard@example.com,
+6,Dr. Thomas Petit,Médecin Généraliste,78 Rue Nationale,Lille,59000,50.6292,3.0573,03 20 06 78 00,thomas.petit@example.com,
+7,Dr. Isabelle Roux,Ophtalmologue,33 Avenue des Champs-Élysées,Paris,75008,48.8698,2.3077,01 53 93 97 00,isabelle.roux@example.com,
+8,Dr. Laurent Garcia,Endocrinologue,56 La Canebière,Marseille,13001,43.2951,5.3750,04 91 90 63 00,laurent.garcia@example.com,
+9,Dr. Nathalie Blanc,Ophtalmologue,19 Place Bellecour,Lyon,69002,45.7578,4.8320,04 78 37 40 00,nathalie.blanc@example.com,
+10,Dr. François Girard,Endocrinologue,88 Rue de Rivoli,Paris,75004,48.8566,2.3522,01 42 72 60 00,francois.girard@example.com,
