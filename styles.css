@@ -212,6 +212,32 @@ nav {
     margin-right: 0.5rem;
 }
 
+/* Annuaire Promo Section */
+.annuaire-promo-section {
+    background: var(--white);
+    padding: 6rem 2rem;
+    text-align: center;
+    border-top: 1px solid var(--black);
+}
+
+.annuaire-promo-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.annuaire-promo-section h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+}
+
+.annuaire-promo-section p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
 .petition-section {
     background: var(--black);
     color: var(--white);
