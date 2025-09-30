@@ -75,11 +75,11 @@ nav {
 /* Hero Section */
 .hero {
     margin-top: 100px;
-    min-height: 70vh;
+    min-height: 50vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 3rem 2rem;
+    padding: 2rem 2rem;
 }
 
 .hero-container {
@@ -146,7 +146,7 @@ nav {
 /* Section Symptômes */
 .symptoms-section {
     background: var(--gray);
-    padding: 8rem 2rem;
+    padding: 4rem 2rem;
 }
 
 .symptoms-container {
@@ -157,14 +157,14 @@ nav {
 .symptoms-section h2 {
     font-size: 3.5rem;
     font-weight: 700;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     letter-spacing: -0.02em;
 }
 
 .intro-text {
     font-size: 1.2rem;
     line-height: 1.8;
-    margin-bottom: 4rem;
+    margin-bottom: 2.5rem;
     max-width: 900px;
 }
 
@@ -175,8 +175,8 @@ nav {
 .symptoms-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
-    margin-top: 4rem;
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 .symptom-category {
@@ -289,6 +289,7 @@ nav {
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
+    color: var(--black);
 }
 
 /* Responsive */
