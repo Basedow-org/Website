@@ -216,9 +216,7 @@
                     <label for="specialty">Spécialité</label>
                     <select id="specialty">
                         <option value="">Toutes les spécialités</option>
-                        <option value="Endocrinologue">Endocrinologue</option>
-                        <option value="Ophtalmologue">Ophtalmologue</option>
-                        <option value="Médecin Généraliste">Médecin Généraliste</option>
+                        <!-- Options populated dynamically from CSV data -->
                     </select>
                 </div>
                 <div class="filter-group">
@@ -259,6 +257,23 @@
             markersLayer = L.layerGroup().addTo(map);
         }
 
+        // Populate specialty filter dynamically
+        function populateSpecialtyFilter() {
+            const specialties = [...new Set(allDoctors.map(d => d.specialty).filter(s => s))];
+            specialties.sort();
+            
+            const specialtySelect = document.getElementById('specialty');
+            // Keep the "all" option
+            specialtySelect.innerHTML = '<option value="">Toutes les spécialités</option>';
+            
+            specialties.forEach(specialty => {
+                const option = document.createElement('option');
+                option.value = specialty;
+                option.textContent = specialty;
+                specialtySelect.appendChild(option);
+            });
+        }
+
         // Load CSV data
         function loadDoctors() {
             Papa.parse('doctors.csv', {
@@ -266,6 +281,7 @@
                 header: true,
                 complete: function(results) {
                     allDoctors = results.data.filter(d => d.name && d.latitude && d.longitude);
+                    populateSpecialtyFilter();
                     displayDoctors(allDoctors);
                     addMarkersToMap(allDoctors);
                 }
