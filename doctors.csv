@@ -1,5 +1,5 @@
 id,name,specialty,address,city,postal_code,latitude,longitude,phone,email,website
-1,Dr Florian Dalmas,Chirugien en ophtalmologie,Hôpital Nord de Marseille,Marseille,13015,43.2961743,5.3699525,04 91 38 00 00,florian.dalmas@ap-hm.fr,
+1,Dr Florian Dalmas,Ophtalmologie,Hôpital Nord de Marseille,Marseille,13015,43.2961743,5.3699525,04 91 38 00 00,florian.dalmas@ap-hm.fr,
 2,CHU Angers,Endocrinologie,4 rue Larrey,Angers,49933,47.4739884,-0.5515588,02 41 35 49 97,edn@chu-angers.fr,
 3,CHU Angers,Ophtalmologie,4 rue Larrey,Angers,49933,47.4739884,-0.5515588,02 41 35 32 74,ophtalmologie@chu-angers.fr,
 4,Dr Franck SCHILLO,Endocrinologie,CHU Besançon 3 Boulevard Fleming,Besançon,25030,47.2380222,6.0243622,03 81 66 82 29,fschillo@chu-besancon.fr,
