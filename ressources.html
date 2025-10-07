@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ressources - Basedow.org</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="header-placeholder" data-include="header"></div>
+
+    <main class="resources-page">
+        <section class="resources-hero" aria-labelledby="resources-title">
+            <h1 id="resources-title">Ressources</h1>
+            <p class="resources-intro">Découvrez nos guides et articles sélectionnés pour mieux comprendre et vivre avec la maladie de Basedow.</p>
+        </section>
+
+        <section class="resources-controls" aria-label="Filtres des ressources">
+            <div class="filter-group">
+                <label>Catégories</label>
+                <div id="resources-category-buttons" class="category-buttons"></div>
+            </div>
+        </section>
+
+        <section class="resources-grid-section">
+            <div id="resources-grid" class="resources-grid" aria-live="polite"></div>
+        </section>
+    </main>
+
+    <div id="resource-modal" class="resource-modal" aria-hidden="true">
+        <div class="resource-modal__overlay" data-close-modal></div>
+        <div class="resource-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="resource-modal-title" tabindex="-1">
+            <button class="resource-modal__close" type="button" aria-label="Fermer la ressource" data-close-modal>×</button>
+            <article class="resource-modal__content">
+                <div class="resource-modal__body">
+                    <div class="resource-modal__empty">
+                        <h2 id="resource-modal-title">Aucune ressource ouverte</h2>
+                        <p>Sélectionnez un article pour afficher son contenu complet.</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+
+    <script src="header.js"></script>
+    <script src="resources.js"></script>
+</body>
+</html>

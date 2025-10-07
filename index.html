@@ -7,23 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo-container">
-                <img src="logo_basedow.svg" alt="Basedow.org" class="logo">
-                <span class="logo-text">Basedow.org</span>
-            </div>
-            <button class="menu-toggle" onclick="toggleMenu()">☰</button>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#symptomes">Symptômes</a></li>
-                <li><a href="annuaire.html">Annuaire</a></li>
-                <li><a href="#ressources">Ressources</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
+    <div id="header-placeholder" data-include="header"></div>
 
     <!-- Hero Section -->
     <section id="accueil" class="hero">
@@ -111,18 +95,6 @@
         </div>
     </section>
 
-    <script>
-        function toggleMenu() {
-            const navMenu = document.getElementById('navMenu');
-            navMenu.classList.toggle('active');
-        }
-
-        // Close menu when clicking on a link
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('navMenu').classList.remove('active');
-            });
-        });
-    </script>
+    <script src="header.js"></script>
 </body>
 </html>

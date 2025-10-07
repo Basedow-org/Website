@@ -4,8 +4,12 @@ This repository contains the source code for the Basedow organization website, h
 
 ## Structure
 
-- HTML, CSS, and JavaScript files for the website
-- Served via GitHub Pages at: https://basedow-org.github.io/Website/
+- `index.html`, `annuaire.html`, `ressources.html` — pages served on GitHub Pages
+- `partials/header.html` — shared navigation included dynamically by `header.js`
+- `resources/` — Markdown sources consumed by `resources.js`
+- `styles.css` — global styling
+- `header.js`, `resources.js` — client-side behaviors (navigation + ressources page)
+
 
 ## License
 
