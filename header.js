@@ -22,6 +22,29 @@ async function loadHeader() {
     }
 }
 
+async function loadFooter() {
+    const placeholders = document.querySelectorAll('[data-include="footer"]');
+
+    if (!placeholders.length) {
+        return;
+    }
+
+    try {
+        const response = await fetch('partials/footer.html');
+        if (!response.ok) {
+            throw new Error(`Erreur de chargement du footer: ${response.status}`);
+        }
+
+        const footerHTML = await response.text();
+
+        placeholders.forEach(container => {
+            container.innerHTML = footerHTML;
+        });
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 function initializeHeader(container) {
     const navMenu = container.querySelector('#navMenu');
     const menuToggle = container.querySelector('.menu-toggle');
@@ -61,3 +84,4 @@ function adjustHeaderLinks(container) {
 }
 
 loadHeader();
+loadFooter();

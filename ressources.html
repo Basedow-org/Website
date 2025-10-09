@@ -11,13 +11,20 @@
 
     <main class="resources-page">
         <section class="resources-hero" aria-labelledby="resources-title">
-            <h1 id="resources-title">Ressources</h1>
-            <p class="resources-intro">Découvrez nos guides et articles sélectionnés pour mieux comprendre et vivre avec la maladie de Basedow.</p>
+            <h1 id="resources-title">Liens utiles et Articles sur la maladie de Basedow</h1>
+        </section>
+
+        <section class="useful-links-section" aria-label="Liens utiles">
+            <div class="useful-links-container">
+                <div id="useful-links-list" class="useful-links-list">
+                    <div class="loading-message">Chargement des liens...</div>
+                </div>
+            </div>
         </section>
 
         <section class="resources-controls" aria-label="Filtres des ressources">
+            <h2>Articles</h2>
             <div class="filter-group">
-                <label>Catégories</label>
                 <div id="resources-category-buttons" class="category-buttons"></div>
             </div>
         </section>
@@ -42,6 +49,9 @@
         </div>
     </div>
 
+    <div id="footer-placeholder" data-include="footer"></div>
+
+    <script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
     <script src="header.js"></script>
     <script src="resources.js"></script>
 </body>

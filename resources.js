@@ -27,11 +27,113 @@ async function initializeResources() {
         return;
     }
 
+    // Load useful links
+    loadUsefulLinks();
+
     const items = await Promise.all(resourcesConfig.map(loadResourceMeta));
     resourcesState.items = items.filter(Boolean);
 
     renderResourceGrid(gridContainer);
     setupModalListeners(modalRoot);
+}
+
+function loadUsefulLinks() {
+    const linksContainer = document.getElementById("useful-links-list");
+    
+    if (!linksContainer) {
+        return;
+    }
+
+    // Check if Papa Parse is available (from annuaire page)
+    if (typeof Papa !== 'undefined') {
+        // Use Papa Parse if available
+        Papa.parse('useful-links.csv', {
+            download: true,
+            header: true,
+            skipEmptyLines: true,
+            complete: function(results) {
+                if (!results.data || results.data.length === 0) {
+                    linksContainer.innerHTML = '<p class="loading-message">Aucun lien disponible pour le moment.</p>';
+                    return;
+                }
+
+                const linksHTML = results.data.map(link => {
+                    if (!link.name || !link.url) return '';
+                    
+                    return `
+                        <div class="link-item">
+                            <div class="link-info">
+                                <h3 class="link-name">${link.name}</h3>
+                                <p class="link-description">${link.description || ''}</p>
+                            </div>
+                            <div class="link-action">
+                                <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="link-button">
+                                    Visiter
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }).filter(Boolean).join('');
+
+                linksContainer.innerHTML = linksHTML || '<p class="loading-message">Aucun lien disponible pour le moment.</p>';
+            },
+            error: function(error) {
+                console.error('Erreur lors du chargement des liens:', error);
+                linksContainer.innerHTML = '<p class="loading-message">Erreur lors du chargement des liens.</p>';
+            }
+        });
+    } else {
+        // Fallback: manual CSV parsing for simple cases
+        fetch('useful-links.csv')
+            .then(response => response.text())
+            .then(csvText => {
+                const lines = csvText.trim().split('\n').filter(line => line.trim());
+                
+                if (lines.length <= 1) {
+                    linksContainer.innerHTML = '<p class="loading-message">Aucun lien disponible pour le moment.</p>';
+                    return;
+                }
+
+                // Parse header
+                const headers = lines[0].split(',').map(h => h.trim());
+                const nameIdx = headers.indexOf('name');
+                const descIdx = headers.indexOf('description');
+                const urlIdx = headers.indexOf('url');
+
+                // Parse data rows
+                const linksHTML = lines.slice(1).map(line => {
+                    // Split by comma, but handle quoted fields
+                    const parts = line.match(/(".*?"|[^,]+)(?=\s*,|\s*$)/g) || [];
+                    const values = parts.map(p => p.replace(/^"|"$/g, '').trim());
+                    
+                    const name = values[nameIdx] || '';
+                    const description = values[descIdx] || '';
+                    const url = values[urlIdx] || '';
+                    
+                    if (!name || !url) return '';
+                    
+                    return `
+                        <div class="link-item">
+                            <div class="link-info">
+                                <h3 class="link-name">${name}</h3>
+                                <p class="link-description">${description}</p>
+                            </div>
+                            <div class="link-action">
+                                <a href="${url}" target="_blank" rel="noopener noreferrer" class="link-button">
+                                    Visiter
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                }).filter(Boolean).join('');
+
+                linksContainer.innerHTML = linksHTML || '<p class="loading-message">Aucun lien disponible pour le moment.</p>';
+            })
+            .catch(error => {
+                console.error('Erreur lors du chargement des liens:', error);
+                linksContainer.innerHTML = '<p class="loading-message">Erreur lors du chargement des liens.</p>';
+            });
+    }
 }
 
 async function loadResourceMeta(resource) {

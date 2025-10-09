@@ -192,7 +192,7 @@
             <div class="filters">
                 <div class="filter-group">
                     <label for="search">Rechercher</label>
-                    <input type="text" id="search" placeholder="Nom, ville...">
+                    <input type="text" id="search" placeholder="Nom, ville, spécialité...">
                 </div>
                 <div class="filter-group">
                     <label for="specialty">Spécialité</label>
@@ -200,10 +200,6 @@
                         <option value="">Toutes les spécialités</option>
                         <!-- Options populated dynamically from CSV data -->
                     </select>
-                </div>
-                <div class="filter-group">
-                    <label for="city">Ville</label>
-                    <input type="text" id="city" placeholder="Paris, Lyon...">
                 </div>
             </div>
 
@@ -316,20 +312,17 @@
         function filterDoctors() {
             const searchTerm = document.getElementById('search').value.toLowerCase();
             const specialtyFilter = document.getElementById('specialty').value;
-            const cityFilter = document.getElementById('city').value.toLowerCase();
 
             const filtered = allDoctors.filter(doctor => {
                 const matchesSearch = !searchTerm || 
                     doctor.name.toLowerCase().includes(searchTerm) ||
-                    doctor.city.toLowerCase().includes(searchTerm);
+                    doctor.city.toLowerCase().includes(searchTerm) ||
+                    doctor.specialty.toLowerCase().includes(searchTerm);
                 
                 const matchesSpecialty = !specialtyFilter || 
                     doctor.specialty === specialtyFilter;
-                
-                const matchesCity = !cityFilter || 
-                    doctor.city.toLowerCase().includes(cityFilter);
 
-                return matchesSearch && matchesSpecialty && matchesCity;
+                return matchesSearch && matchesSpecialty;
             });
 
             displayDoctors(filtered);
@@ -339,12 +332,14 @@
         // Event listeners
         document.getElementById('search').addEventListener('input', filterDoctors);
         document.getElementById('specialty').addEventListener('change', filterDoctors);
-        document.getElementById('city').addEventListener('input', filterDoctors);
 
         // Initialize
         initMap();
         loadDoctors();
     </script>
+
+    <div id="footer-placeholder" data-include="footer"></div>
+
     <script src="header.js"></script>
 </body>
 </html>
