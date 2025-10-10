@@ -829,17 +829,17 @@ section {
     align-items: center;
     justify-content: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 1 / 1;
 }
 
 .author-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    display: none;
-}
-
-.author-image.loaded {
+    object-position: center;
     display: block;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
 }
 
 .photo-fallback {
