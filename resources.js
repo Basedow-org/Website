@@ -10,6 +10,10 @@ const resourcesConfig = [
     {
         id: "soutien",
         file: "resources/soutien.md"
+    },
+    {
+        id: "temoignage-myxoedeme-pretibial",
+        file: "resources/temoignage-myxoedeme-pretibial.md"
     }
 ];
 
