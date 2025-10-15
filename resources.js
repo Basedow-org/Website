@@ -47,7 +47,8 @@ function loadUsefulLinks() {
     // Check if Papa Parse is available (from annuaire page)
     if (typeof Papa !== 'undefined') {
         // Use Papa Parse if available
-        Papa.parse('useful-links.csv', {
+        const basePath = getBasePath();
+        Papa.parse(`${basePath}useful-links.csv`, {
             download: true,
             header: true,
             skipEmptyLines: true,
@@ -84,7 +85,8 @@ function loadUsefulLinks() {
         });
     } else {
         // Fallback: manual CSV parsing for simple cases
-        fetch('useful-links.csv')
+        const basePath = getBasePath();
+        fetch(`${basePath}useful-links.csv`)
             .then(response => response.text())
             .then(csvText => {
                 const lines = csvText.trim().split('\n').filter(line => line.trim());
@@ -138,9 +140,13 @@ function loadUsefulLinks() {
 
 async function loadResourceMeta(resource) {
     try {
-        const response = await fetch(resource.file);
+        // Get the base path for GitHub Pages compatibility
+        const basePath = getBasePath();
+        const resourcePath = `${basePath}${resource.file}`;
+        
+        const response = await fetch(resourcePath);
         if (!response.ok) {
-            throw new Error(`Impossible de charger ${resource.file}`);
+            throw new Error(`Impossible de charger ${resource.file} (tried: ${resourcePath})`);
         }
 
         const text = await response.text();
@@ -156,6 +162,23 @@ async function loadResourceMeta(resource) {
         console.error(error);
         return null;
     }
+}
+
+function getBasePath() {
+    // Get the base path from the current location
+    // For GitHub Pages: /Website/ or /
+    // For local: /
+    const path = window.location.pathname;
+    const pathSegments = path.split('/').filter(Boolean);
+    
+    // If we're on a page (e.g., /ressources.html or /Website/ressources.html)
+    // we need to go back to the root
+    if (pathSegments.length > 0 && pathSegments[pathSegments.length - 1].includes('.html')) {
+        pathSegments.pop(); // Remove the HTML file
+    }
+    
+    // Return the base path with trailing slash, or empty string for root
+    return pathSegments.length > 0 ? '/' + pathSegments.join('/') + '/' : '';
 }
 
 function parseFrontMatter(text) {
