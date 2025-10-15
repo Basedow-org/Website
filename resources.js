@@ -144,12 +144,15 @@ async function loadResourceMeta(resource) {
         const basePath = getBasePath();
         const resourcePath = `${basePath}${resource.file}`;
         
+        console.log(`Fetching resource: ${resource.file} from path: ${resourcePath}`);
         const response = await fetch(resourcePath);
         if (!response.ok) {
-            throw new Error(`Impossible de charger ${resource.file} (tried: ${resourcePath})`);
+            console.error(`Failed to load ${resource.file} - Status: ${response.status} ${response.statusText}`);
+            throw new Error(`Impossible de charger ${resource.file} (tried: ${resourcePath}, status: ${response.status})`);
         }
 
         const text = await response.text();
+        console.log(`Successfully loaded ${resource.file}, length: ${text.length}`);
         const { metadata, content } = parseFrontMatter(text);
 
         return {
@@ -159,7 +162,7 @@ async function loadResourceMeta(resource) {
             rawContent: content
         };
     } catch (error) {
-        console.error(error);
+        console.error('Error loading resource:', error);
         return null;
     }
 }
@@ -169,16 +172,13 @@ function getBasePath() {
     // For GitHub Pages: /Website/ or /
     // For local: /
     const path = window.location.pathname;
-    const pathSegments = path.split('/').filter(Boolean);
     
-    // If we're on a page (e.g., /ressources.html or /Website/ressources.html)
-    // we need to go back to the root
-    if (pathSegments.length > 0 && pathSegments[pathSegments.length - 1].includes('.html')) {
-        pathSegments.pop(); // Remove the HTML file
-    }
+    // Remove the filename from the path to get the directory
+    const lastSlashIndex = path.lastIndexOf('/');
+    const basePath = lastSlashIndex >= 0 ? path.substring(0, lastSlashIndex + 1) : './';
     
-    // Return the base path with trailing slash, or empty string for root
-    return pathSegments.length > 0 ? '/' + pathSegments.join('/') + '/' : '';
+    console.log('Base path calculated:', basePath, 'from pathname:', path);
+    return basePath;
 }
 
 function parseFrontMatter(text) {
