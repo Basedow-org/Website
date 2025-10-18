@@ -2,7 +2,7 @@
 title: "Le myxœdème prétibial raconté par Myriam"
 date: "2025-10-15"
 summary: "Témoignage d'une patiente atteinte de la maladie de Basedow, d'une orbitopathie de grade 3 et d'un myxœdème prétibial"
-categories: "Témoignage"
+categories: "Témoignage, Myxœdème"
 top: false
 ---
 
