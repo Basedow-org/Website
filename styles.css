@@ -706,7 +706,6 @@ nav {
 
     .nav-menu a {
         padding: 1rem 2rem;
-        border-top: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     .menu-toggle {
