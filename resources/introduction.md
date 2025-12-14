@@ -6,8 +6,6 @@ categories: "Diagnostic, Informations générales"
 top: true
 ---
 
-# Comprendre la Maladie de Basedow
-
 La maladie de Basedow est une affection auto-immune qui affecte principalement la thyroïde. Cette glande produit des hormones essentielles à la régulation du métabolisme.
 
 ## Symptômes fréquents

@@ -6,8 +6,6 @@ categories: "Témoignage, Myxœdème"
 top: false
 ---
 
-# Le myxœdème prétibial raconté par Myriam
-
 *Atteinte de la maladie de Basedow, d'une orbitopathie de grade 3 et d'un myxœdème prétibial*
 
 ## Qu'est-ce que c'est ?

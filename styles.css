@@ -737,6 +737,33 @@ nav {
     line-height: 1.7;
 }
 
+.resource-modal__body table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+}
+
+.resource-modal__body th,
+.resource-modal__body td {
+    padding: 0.75rem 0.85rem;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    vertical-align: top;
+    text-align: left;
+}
+
+.resource-modal__body thead th {
+    background: var(--gray);
+    font-weight: 700;
+}
+
+.resource-modal__body tbody tr:nth-child(even) {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.resource-modal__body tbody tr:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
 .resource-modal__empty {
     text-align: center;
     padding: 1rem 0 2rem;

@@ -6,7 +6,6 @@ categories: "Support, Communauté"
 top: true
 ---
 
-# Groupes de Soutien et Communauté
 
 Rejoindre une communauté peut apporter un soutien moral immense.
 

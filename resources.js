@@ -4,12 +4,12 @@ const resourcesConfig = [
         file: "resources/introduction.md"
     },
     {
-        id: "alimentation",
-        file: "resources/alimentation.md"
-    },
-    {
         id: "soutien",
         file: "resources/soutien.md"
+    },
+    {
+        id: "tableau-greffes-paupiere",
+        file: "resources/tableau_greffes_paupiere.md"
     },
     {
         id: "temoignage-myxoedeme-pretibial",
@@ -366,6 +366,15 @@ function convertMarkdownToHtml(markdown) {
                 html.push("</ul>");
                 inList = false;
             }
+            return;
+        }
+
+        if (trimmed.startsWith("<") && trimmed.endsWith(">")) {
+            if (inList) {
+                html.push("</ul>");
+                inList = false;
+            }
+            html.push(line);
             return;
         }
 
