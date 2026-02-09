@@ -2,7 +2,7 @@
 title: "Décompression orbitaire dans l’exophtalmie de Basedow : retour d’expérience des patients"
 date: "2026-02-08"
 summary: "Synthèse de témoignages de patients et analyse comparative des techniques de décompression orbitaire, avec bénéfices, limites et points de vigilance."
-categories: "Ophtalmologie, Chirurgie, Témoignages"
+categories: "Ophtalmologie, Chirurgie, Témoignage"
 top: true
 ---
 
@@ -52,68 +52,78 @@ Pour certains, la décompression n’est envisagée qu’en cas de menace foncti
 ## 3. Analyse par type de décompression orbitaire
 
 ### 3.1 Lipectomie (ablation de graisse orbitaire)
-**Principe** : retrait d’une partie de la graisse située derrière le globe oculaire.
+<div class="resource-section-card">
+<p><strong>Principe</strong> : retrait d’une partie de la graisse située derrière le globe oculaire.</p>
 
-**Avantages rapportés** :
+<p><strong>Avantages rapportés</strong> :</p>
 - technique jugée moins agressive et moins risquée que les décompressions osseuses
 - diminution modérée de l’exophtalmie
 - risque parfois perçu comme moindre sur la diplopie
 
-**Inconvénients rapportés** :
+<p><strong>Inconvénients rapportés</strong> :</p>
 - résultats insuffisants dans les exophtalmies importantes
 - creusement secondaire des paupières
 - modification du regard avec aspect fatigué ou vieilli
+</div>
 
 ### 3.2 Décompression du plancher orbitaire inférieur
-**Principe** : ablation partielle de l’os inférieur de l’orbite pour permettre au globe de reculer.
+<div class="resource-section-card">
+<p><strong>Principe</strong> : ablation partielle de l’os inférieur de l’orbite pour permettre au globe de reculer.</p>
 
-**Avantages rapportés** :
+<p><strong>Avantages rapportés</strong> :</p>
 - recul efficace du globe
 - amélioration nette de la compression et parfois de la fermeture palpébrale
 
-**Inconvénients fréquemment cités** :
+<p><strong>Inconvénients fréquemment cités</strong> :</p>
 - descente du globe oculaire (œil plus bas)
 - rétraction de la paupière inférieure
 - scleral show (blanc de l’œil visible)
 - retentissement esthétique important, souvent mal anticipé par les patients
 
 Plusieurs témoignages expriment le regret de ne pas avoir été informés plus clairement des conséquences spécifiques liées à ce type de décompression.
+</div>
 
 ### 3.3 Décompression latérale externe
-**Principe** : élargissement de l’orbite vers l’extérieur.
+<div class="resource-section-card">
+<p><strong>Principe</strong> : élargissement de l’orbite vers l’extérieur.</p>
 
-**Avantages rapportés** :
+<p><strong>Avantages rapportés</strong> :</p>
 - bon compromis entre efficacité et respect de l’esthétique
 - moins de retentissement sur la paupière inférieure
 - souvent préférée dans les formes modérées
 
-**Inconvénients possibles** :
+<p><strong>Inconvénients possibles</strong> :</p>
 - recul parfois insuffisant si utilisée seule
 - asymétries si la décompression n’est pas parfaitement équilibrée
+</div>
 
 ### 3.4 Décompression médiale (vers les sinus)
-**Principe** : ouverture de la paroi interne de l’orbite.
+<div class="resource-section-card">
+<p><strong>Principe</strong> : ouverture de la paroi interne de l’orbite.</p>
 
-**Avantages rapportés** :
+<p><strong>Avantages rapportés</strong> :</p>
 - efficacité importante sur le recul du globe
 - utile dans les formes sévères
 
-**Inconvénients fréquemment évoqués** :
+<p><strong>Inconvénients fréquemment évoqués</strong> :</p>
 - risque plus élevé de diplopie
 - troubles de l’oculomotricité
 - suites postopératoires parfois lourdes
 - risques de problèmes de sinus, surtout s’il existe déjà des problèmes de ce côté
+</div>
 
 ### 3.5 Décompressions combinées
-**Principe** : association de plusieurs parois (osseuses et/ou graisseuses).
+<div class="resource-section-card">
+<p><strong>Principe</strong> : association de plusieurs parois (osseuses et/ou graisseuses).</p>
 
-**Avantages** :
+<p><strong>Avantages</strong> :</p>
 - permet un recul important dans les exophtalmies sévères
 - parfois indispensable en cas de compression du nerf optique
 
-**Inconvénients** :
+<p><strong>Inconvénients</strong> :</p>
 - augmentation du risque de complications (diplopie, asymétries)
 - parcours chirurgical souvent long, avec plusieurs interventions secondaires nécessaires
+</div>
 
 ## 4. Enseignements majeurs issus des témoignages
 Plusieurs messages forts émergent de l’ensemble des réponses :
