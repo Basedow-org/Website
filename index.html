@@ -79,73 +79,29 @@
     <section class="videos-section">
         <div class="videos-container">
             <h2>Témoignages Vidéo</h2>
-            <div class="videos-grid">
-                <!-- Video 1 -->
-                <div class="video-wrapper">
-                    <div class="video-container">
-                        <video id="video1" class="hero-video" loop>
-                            <source src="Basedow_Video.mp4" type="video/mp4">
-                            Votre navigateur ne supporte pas la lecture de vidéos.
-                        </video>
-                        <div class="video-controls">
-                            <button class="control-btn play-pause-btn" data-video="video1" aria-label="Lecture/Pause">
-                                <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                                </svg>
-                                <svg class="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-                                    <rect x="6" y="4" width="4" height="16"></rect>
-                                    <rect x="14" y="4" width="4" height="16"></rect>
-                                </svg>
-                            </button>
-                            <button class="control-btn mute-btn" data-video="video1" aria-label="Son On/Off">
-                                <svg class="sound-on-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;">
-                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                                </svg>
-                                <svg class="sound-off-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                                    <line x1="23" y1="9" x2="17" y2="15"></line>
-                                    <line x1="17" y1="9" x2="23" y2="15"></line>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Video 2 -->
-                <div class="video-wrapper">
-                    <div class="video-container">
-                        <video id="video2" class="hero-video" loop>
-                            <source src="Basedow_Konbini.mp4" type="video/mp4">
-                            Votre navigateur ne supporte pas la lecture de vidéos.
-                        </video>
-                        <div class="video-controls">
-                            <button class="control-btn play-pause-btn" data-video="video2" aria-label="Lecture/Pause">
-                                <svg class="play-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                                </svg>
-                                <svg class="pause-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-                                    <rect x="6" y="4" width="4" height="16"></rect>
-                                    <rect x="14" y="4" width="4" height="16"></rect>
-                                </svg>
-                            </button>
-                            <button class="control-btn mute-btn" data-video="video2" aria-label="Son On/Off">
-                                <svg class="sound-on-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: block;">
-                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                                </svg>
-                                <svg class="sound-off-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
-                                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-                                    <line x1="23" y1="9" x2="17" y2="15"></line>
-                                    <line x1="17" y1="9" x2="23" y2="15"></line>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+            <div class="video-thumbs-grid">
+                <button class="video-thumb" type="button" data-video-src="Basedow_Video.mp4" data-video-title="Témoignage vidéo 1">
+                    <img src="Basedow_Video_thumb.webp" alt="Aperçu du témoignage vidéo 1">
+                    <span class="video-thumb__label">Voir le témoignage</span>
+                </button>
+                <button class="video-thumb" type="button" data-video-src="Basedow_Konbini.mp4" data-video-title="Témoignage vidéo 2">
+                    <img src="Basedow_Konbini_thumb.webp" alt="Aperçu du témoignage vidéo 2">
+                    <span class="video-thumb__label">Voir le témoignage</span>
+                </button>
             </div>
         </div>
     </section>
+
+    <div id="video-modal" class="video-modal" aria-hidden="true">
+        <div class="video-modal__overlay" data-close-video></div>
+        <div class="video-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="video-modal-title" tabindex="-1">
+            <button class="video-modal__close" type="button" aria-label="Fermer la vidéo" data-close-video>×</button>
+            <h3 id="video-modal-title"></h3>
+            <div class="video-modal__media">
+                <video id="video-modal-player" controls playsinline></video>
+            </div>
+        </div>
+    </div>
 
     <!-- Petition Section -->
     <section class="petition-section">
@@ -171,53 +127,45 @@
 
     <script src="header.js"></script>
     <script>
-        // Video player controls for multiple videos
-        document.querySelectorAll('.play-pause-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const videoId = this.getAttribute('data-video');
-                const video = document.getElementById(videoId);
-                const playIcon = this.querySelector('.play-icon');
-                const pauseIcon = this.querySelector('.pause-icon');
-                
-                if (video.paused) {
-                    video.play();
-                    playIcon.style.display = 'none';
-                    pauseIcon.style.display = 'block';
-                } else {
-                    video.pause();
-                    playIcon.style.display = 'block';
-                    pauseIcon.style.display = 'none';
+        const videoModal = document.getElementById('video-modal');
+        const videoPlayer = document.getElementById('video-modal-player');
+        const videoTitle = document.getElementById('video-modal-title');
+
+        function openVideoModal(source, title) {
+            if (!videoModal || !videoPlayer) return;
+            videoPlayer.src = source;
+            videoPlayer.load();
+            videoTitle.textContent = title || 'Témoignage vidéo';
+            videoModal.setAttribute('aria-hidden', 'false');
+            videoModal.querySelector('.video-modal__dialog')?.focus();
+        }
+
+        function closeVideoModal() {
+            if (!videoModal || !videoPlayer) return;
+            videoPlayer.pause();
+            videoPlayer.removeAttribute('src');
+            videoPlayer.load();
+            videoModal.setAttribute('aria-hidden', 'true');
+        }
+
+        document.querySelectorAll('.video-thumb').forEach(button => {
+            button.addEventListener('click', () => {
+                const source = button.getAttribute('data-video-src');
+                const title = button.getAttribute('data-video-title');
+                if (source) {
+                    openVideoModal(source, title);
                 }
             });
         });
 
-        document.querySelectorAll('.mute-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const videoId = this.getAttribute('data-video');
-                const video = document.getElementById(videoId);
-                const soundOnIcon = this.querySelector('.sound-on-icon');
-                const soundOffIcon = this.querySelector('.sound-off-icon');
-                
-                video.muted = !video.muted;
-                if (video.muted) {
-                    soundOnIcon.style.display = 'none';
-                    soundOffIcon.style.display = 'block';
-                } else {
-                    soundOnIcon.style.display = 'block';
-                    soundOffIcon.style.display = 'none';
-                }
-            });
+        document.querySelectorAll('[data-close-video]').forEach(element => {
+            element.addEventListener('click', closeVideoModal);
         });
 
-        // Start all videos with sound ON (unmuted)
-        document.querySelectorAll('video').forEach(video => {
-            video.muted = false;
-        });
-        
-        // Set initial icon states (sound ON)
-        document.querySelectorAll('.mute-btn').forEach(btn => {
-            btn.querySelector('.sound-on-icon').style.display = 'block';
-            btn.querySelector('.sound-off-icon').style.display = 'none';
+        document.addEventListener('keydown', event => {
+            if (event.key === 'Escape' && videoModal?.getAttribute('aria-hidden') === 'false') {
+                closeVideoModal();
+            }
         });
     </script>
 </body>
