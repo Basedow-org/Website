@@ -14,6 +14,10 @@ const resourcesConfig = [
     {
         id: "temoignage-myxoedeme-pretibial",
         file: "resources/temoignage-myxoedeme-pretibial.md"
+    },
+    {
+        id: "decompression-orbitaire-retour-experience",
+        file: "resources/decompression-orbitaire-retour-experience.md"
     }
 ];
 
@@ -39,6 +43,11 @@ async function initializeResources() {
 
     renderResourceGrid(gridContainer);
     setupModalListeners(modalRoot);
+
+    const initialResourceId = getResourceIdFromUrl();
+    if (initialResourceId) {
+        openResourceModal(initialResourceId);
+    }
 }
 
 function loadUsefulLinks() {
@@ -185,6 +194,55 @@ function getBasePath() {
     return basePath;
 }
 
+function getResourceIdFromUrl() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("resource");
+}
+
+function updateUrlWithResource(resourceId) {
+    const url = new URL(window.location.href);
+    if (resourceId) {
+        url.searchParams.set("resource", resourceId);
+    } else {
+        url.searchParams.delete("resource");
+    }
+    window.history.replaceState({}, "", url);
+}
+
+function buildShareUrl(resourceId) {
+    const url = new URL(window.location.href);
+    if (resourceId) {
+        url.searchParams.set("resource", resourceId);
+    } else {
+        url.searchParams.delete("resource");
+    }
+    return url.toString();
+}
+
+function attachShareHandler(resourceId, modalBody) {
+    const shareButton = modalBody.querySelector("[data-share-resource]");
+    if (!shareButton) return;
+
+    shareButton.addEventListener("click", async () => {
+        const shareUrl = buildShareUrl(resourceId);
+        try {
+            if (navigator.clipboard?.writeText) {
+                await navigator.clipboard.writeText(shareUrl);
+                const originalText = shareButton.textContent;
+                shareButton.textContent = "Lien copié";
+                setTimeout(() => {
+                    shareButton.textContent = originalText;
+                }, 2000);
+            } else {
+                window.prompt("Copiez le lien :", shareUrl);
+            }
+        } catch (error) {
+            console.error("Impossible de copier le lien:", error);
+            window.prompt("Copiez le lien :", shareUrl);
+        }
+    });
+}
+
 function parseFrontMatter(text) {
     const delimiter = "---";
     let metadata = {};
@@ -314,7 +372,10 @@ function openResourceModal(resourceId) {
     if (!modalRoot) return;
 
     const item = resourcesState.items.find(entry => entry.id === resourceId);
-    if (!item) return;
+    if (!item) {
+        updateUrlWithResource(null);
+        return;
+    }
 
     const modalBody = modalRoot.querySelector(".resource-modal__body");
     if (!modalBody) return;
@@ -325,12 +386,19 @@ function openResourceModal(resourceId) {
     const content = convertMarkdownToHtml(item.rawContent);
     
     modalBody.innerHTML = `
-        <h2 id="resource-modal-title">${escapeHtml(title)}</h2>
+        <div class="resource-modal__header">
+            <h2 id="resource-modal-title">${escapeHtml(title)}</h2>
+            <button class="resource-modal__share" type="button" data-share-resource>
+                Partager
+            </button>
+        </div>
         ${content}
     `;
 
     modalRoot.setAttribute("aria-hidden", "false");
     modalRoot.querySelector(".resource-modal__dialog")?.focus();
+    updateUrlWithResource(resourceId);
+    attachShareHandler(resourceId, modalBody);
 }
 
 function closeResourceModal() {
@@ -339,6 +407,7 @@ function closeResourceModal() {
 
     modalRoot.setAttribute("aria-hidden", "true");
     modalRoot.querySelector(".resource-modal__body").innerHTML = "";
+    updateUrlWithResource(null);
 }
 
 function setupModalListeners(modalRoot) {
