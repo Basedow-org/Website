@@ -124,13 +124,50 @@ Plusieurs messages forts émergent de l’ensemble des réponses :
 
 ## Tableau comparatif des types de décompression orbitaire
 
-| Type de décompression | Principe | Avantages rapportés par les patients | Inconvénients / risques fréquemment rapportés |
-| --- | --- | --- | --- |
-| Lipectomie (graisse orbitaire) | Ablation d’une partie de la graisse située derrière le globe | Technique perçue comme moins agressive. Diminution modérée de l’exophtalmie. Moins de modifications osseuses. | Efficacité limitée dans les exophtalmies importantes. Creusement du regard. Vieillissement prématuré du contour de l’œil. |
-| Plancher orbitaire inférieur | Ablation partielle de l’os sous l’œil | Recul important du globe. Amélioration de la compression et de la fermeture palpébrale. | Descente du globe (œil plus bas). Rétraction de la paupière inférieure. Scleral show. Retentissement esthétique souvent mal anticipé. |
-| Décompression latérale externe | Élargissement de l’orbite vers l’extérieur | Bon compromis efficacité / esthétique. Moins d’impact sur la paupière inférieure. Souvent mieux tolérée. | Recul parfois insuffisant si isolée. Asymétries possibles. |
-| Décompression médiale (interne) | Ouverture de la paroi interne de l’orbite vers les sinus | Recul efficace du globe. Utile dans les formes sévères. | Risque accru de diplopie. Troubles de l’oculomotricité. Suites postopératoires lourdes. |
-| Décompressions combinées | Association de plusieurs parois osseuses et/ou graisseuses | Recul maximal possible. Indispensable en cas de compression du nerf optique. | Risque élevé de diplopie et d’asymétrie. Parcours chirurgical long. Chirurgies secondaires fréquentes. |
+<div style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+  <table>
+    <thead>
+      <tr>
+        <th>Type de décompression</th>
+        <th>Principe</th>
+        <th>Avantages rapportés par les patients</th>
+        <th>Inconvénients / risques fréquemment rapportés</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Lipectomie (graisse orbitaire)</strong></td>
+        <td>Ablation d’une partie de la graisse située derrière le globe</td>
+        <td>Technique perçue comme moins agressive. Diminution modérée de l’exophtalmie. Moins de modifications osseuses.</td>
+        <td>Efficacité limitée dans les exophtalmies importantes. Creusement du regard. Vieillissement prématuré du contour de l’œil.</td>
+      </tr>
+      <tr>
+        <td><strong>Plancher orbitaire inférieur</strong></td>
+        <td>Ablation partielle de l’os sous l’œil</td>
+        <td>Recul important du globe. Amélioration de la compression et de la fermeture palpébrale.</td>
+        <td>Descente du globe (œil plus bas). Rétraction de la paupière inférieure. Scleral show. Retentissement esthétique souvent mal anticipé.</td>
+      </tr>
+      <tr>
+        <td><strong>Décompression latérale externe</strong></td>
+        <td>Élargissement de l’orbite vers l’extérieur</td>
+        <td>Bon compromis efficacité / esthétique. Moins d’impact sur la paupière inférieure. Souvent mieux tolérée.</td>
+        <td>Recul parfois insuffisant si isolée. Asymétries possibles.</td>
+      </tr>
+      <tr>
+        <td><strong>Décompression médiale (interne)</strong></td>
+        <td>Ouverture de la paroi interne de l’orbite vers les sinus</td>
+        <td>Recul efficace du globe. Utile dans les formes sévères.</td>
+        <td>Risque accru de diplopie. Troubles de l’oculomotricité. Suites postopératoires lourdes.</td>
+      </tr>
+      <tr>
+        <td><strong>Décompressions combinées</strong></td>
+        <td>Association de plusieurs parois osseuses et/ou graisseuses</td>
+        <td>Recul maximal possible. Indispensable en cas de compression du nerf optique.</td>
+        <td>Risque élevé de diplopie et d’asymétrie. Parcours chirurgical long. Chirurgies secondaires fréquentes.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 ## Conclusion
 La décompression orbitaire peut améliorer significativement la qualité de vie, notamment sur le plan fonctionnel. Cependant, chaque technique présente des bénéfices et des risques spécifiques, tant fonctionnels qu’esthétiques. Les témoignages soulignent l’importance d’un choix individualisé, fondé sur une information claire, comparative et honnête, afin d’éviter des attentes irréalistes et de mieux préparer les patients aux suites possibles.
