@@ -229,6 +229,107 @@ nav {
     text-align: center;
 }
 
+.video-thumbs-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 360px));
+    gap: 2rem;
+    justify-content: center;
+}
+
+.video-thumb {
+    background: var(--white);
+    border: 2px solid var(--black);
+    padding: 0;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.18);
+    display: grid;
+    grid-template-rows: auto 1fr;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.video-thumb img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    display: block;
+}
+
+.video-thumb__label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-top: 2px solid var(--black);
+}
+
+.video-thumb:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: 14px 14px 0 rgba(0, 0, 0, 0.22);
+}
+
+.video-thumb:focus-visible {
+    outline: 3px solid var(--black);
+    outline-offset: 4px;
+}
+
+.video-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2100;
+}
+
+.video-modal[aria-hidden="false"] {
+    display: flex;
+}
+
+.video-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.video-modal__dialog {
+    position: relative;
+    background: var(--white);
+    border: 2px solid var(--black);
+    width: min(90vw, 520px);
+    max-height: 90vh;
+    padding: 2rem;
+    box-shadow: 16px 16px 0 rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    display: grid;
+    gap: 1.25rem;
+}
+
+.video-modal__close {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    color: var(--black);
+}
+
+.video-modal__media {
+    width: 100%;
+}
+
+.video-modal__media video {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 16;
+    background: var(--black);
+    border: 2px solid var(--black);
+}
+
 .videos-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
