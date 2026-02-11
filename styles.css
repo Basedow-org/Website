@@ -607,6 +607,12 @@ nav {
     font-style: italic;
 }
 
+@media (max-width: 900px) {
+    .resources-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 @media (max-width: 768px) {
     .link-item {
         grid-template-columns: 1fr;
@@ -1030,6 +1036,11 @@ nav {
     .videos-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
+    }
+
+    .video-thumbs-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
     }
 }
 
