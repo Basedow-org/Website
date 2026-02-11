@@ -790,23 +790,29 @@ nav {
 .resource-modal__dialog {
     position: relative;
     background: var(--white);
-    border: 2px solid var(--black);
-    max-width: 900px;
-    width: 90%;
-    max-height: 90vh;
+    border: none;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
     overflow: hidden;
-    box-shadow: 16px 16px 0 rgba(0, 0, 0, 0.2);
-    padding: 2.5rem;
+    box-shadow: none;
+    padding: 2rem 2rem 1.5rem;
+    border-radius: 0;
 }
 
 .resource-modal--fullscreen .resource-modal__dialog {
-    width: min(96vw, 1400px);
-    max-height: 94vh;
-    padding: 2rem;
+    width: 100vw;
+    max-height: 100vh;
+    height: 100vh;
+    padding: 2rem 2rem 1.5rem;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
 }
 
 .resource-modal--fullscreen .resource-modal__content {
-    max-height: calc(94vh - 3rem);
+    max-height: calc(100vh - 3.5rem);
 }
 
 .resource-modal__close {
@@ -827,7 +833,7 @@ nav {
 
 .resource-modal__content {
     overflow-y: auto;
-    max-height: calc(90vh - 4rem);
+    max-height: calc(100vh - 3.5rem);
 }
 
 .resource-modal__body h1,
