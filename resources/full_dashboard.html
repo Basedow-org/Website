@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Comparatif Exophtalmie</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #FDF8F3;
+            --card-bg: #FFFFFF;
+            --text-color: #4A4A4A;
+            --header-color: #C17B5F;
+            --border-color: #E8D4C4;
+            --accent-coral: #E8A598;
+            --accent-sand: #D4A574;
+            --accent-blue: #A8D5E5;
+            --accent-beige: #C9B99A;
+        }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; 
+            padding: 40px; 
+            background: linear-gradient(135deg, #FDF8F3 0%, #F5EDE4 100%); 
+            color: var(--text-color); 
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header { 
+            border-bottom: 4px solid var(--accent-coral); 
+            margin-bottom: 50px; 
+            padding-bottom: 25px; 
+        }
+        h1 { 
+            font-size: 2.5rem; 
+            font-weight: 700; 
+            margin: 0; 
+            color: var(--header-color);
+            letter-spacing: -0.5px;
+        }
+        .dashboard-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 35px; 
+        }
+        .card { 
+            border: none; 
+            padding: 30px; 
+            background: var(--card-bg); 
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(193, 123, 95, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(193, 123, 95, 0.12);
+        }
+        .full-width { grid-column: 1 / -1; }
+        .chart-container { height: 480px; position: relative; }
+        table { 
+            width: 100%; 
+            border-collapse: separate; 
+            border-spacing: 0;
+            margin-top: 25px; 
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        th, td { 
+            border: none; 
+            padding: 14px; 
+            text-align: center; 
+        }
+        th { 
+            background: var(--accent-coral); 
+            color: white; 
+            text-transform: uppercase; 
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        td {
+            background: #FFF9F5;
+            border-bottom: 1px solid var(--border-color);
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:nth-child(even) td {
+            background: #FDF5EE;
+        }
+        .comment-group { 
+            margin-top: 70px; 
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(193, 123, 95, 0.08);
+        }
+        .comment-group h2 { 
+            border-bottom: 3px solid var(--accent-coral); 
+            padding-bottom: 15px; 
+            margin-top: 0;
+            color: var(--header-color);
+            font-weight: 600;
+        }
+        .comment-item { 
+            padding: 18px; 
+            border-bottom: 1px solid var(--border-color);
+            font-style: italic; 
+            color: #5A5A5A;
+            line-height: 1.7;
+        }
+        .comment-item:last-child {
+            border-bottom: none;
+        }
+        .card h2 { 
+            font-size: 0.95rem; 
+            font-weight: 600;
+            margin-top: 0; 
+            border-left: 4px solid var(--accent-coral); 
+            padding-left: 18px; 
+            margin-bottom: 25px; 
+            line-height: 1.5; 
+            min-height: 2.8em; 
+            display: flex; 
+            align-items: center;
+            color: var(--text-color);
+        }
+        @media (max-width: 1000px) {
+            .dashboard-grid { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 768px) {
+            body { padding: 15px; }
+            h1 { font-size: 1.8rem; }
+            header p { font-size: 1rem; }
+            .card { padding: 20px; }
+            .card h2 { font-size: 1.1rem; margin-bottom: 20px; }
+            .chart-container { height: 350px; }
+            th, td { padding: 10px; font-size: 0.9rem; }
+            .comment-group { padding: 20px; }
+            .comment-item { padding: 12px; }
+        }
+        @media (max-width: 480px) {
+            body { padding: 10px; }
+            h1 { font-size: 1.5rem; }
+            .card { padding: 15px; }
+            .card h2 { font-size: 1rem; padding-left: 12px; }
+            .chart-container { height: 300px; }
+            table { font-size: 0.85rem; }
+            th, td { padding: 8px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <header><h1>Rapport de Comparaison Exophtalmie</h1><p style="font-size: 1.1rem; color: #666; margin-top: 5px;">Basé sur 22 Participants</p></header>
+    <div class="dashboard-grid" id="grid"></div>
+    <div id="comparison-section" style="display:none;">
+        <div class="card full-width">
+            <h2>Comparaison Avant / Après (mm)</h2>
+            <p style="font-style: italic; color: #8B7355; margin-bottom: 20px; font-size: 0.9rem; padding: 15px; background: #FDF5EE; border-left: 3px solid var(--accent-coral); border-radius: 4px;">Mesures à l'exophtalmètre (marge d'erreur lors des mesures d'un spécialiste à l'autre + résultat variables d'un patient à l'autre selon la forme de l'orbite et la répartition des graisses)</p>
+            <table>
+                <thead><tr><th>Avant (mm)</th><th>Après (mm)</th><th>Mode de Décompression</th></tr></thead>
+                <tbody id="compTable"></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="comments"></div>
+</div>
+<script>
+    const data = {
+    "charts": [
+        {
+            "key": "Quellesopérationsave",
+            "label": "Quelle(s) opération(s) avez-vous subi pour votre exophtalmie ?",
+            "data": {
+                "Décompression orbitaire": 18,
+                "Injection de botox": 4,
+                "Allongement des paupières supérieures": 3,
+                "Allongement des paupières inférieures": 3,
+                "Canthopexie/ canthoplastie": 3,
+                "Greffe de soutien au niveau des paupières inférieures": 2,
+                "Aucune": 2,
+                "Deux opérations du strabisme": 1,
+                "Blepharoplastie supérieure": 1,
+                "Greffe plaque en titane et os artificiel": 1
+            },
+            "fullWidth": true
+        },
+        {
+            "key": "Avezvouseudesœdèmesl",
+            "label": "Avez-vous eu des œdèmes lors de la décompression?",
+            "data": {
+                "Oui un peu": 7,
+                "Oui beaucoup": 6,
+                "Non": 4,
+                "Non concerné": 3
+            },
+            "fullWidth": false
+        },
+        {
+            "key": "Sivousavezeuunedécom",
+            "label": "Si vous avez eu une décompression, quelle(s) technique(s) ou geste(s) chirurgicaux ont été utilisés? Plusieurs options possibles",
+            "data": {
+                "Lipectomie (on vous a enlevé de la graisse derrière les yeux)": 12,
+                "Plancher orbitaire inférieur (bas)": 11,
+                "Plancher orbitaire latéral externe": 9,
+                "Plancher orbitaire latéral interne (vers sinus)": 5,
+                "Plancher orbitaire supérieur": 5,
+                "́Non concerné": 4,
+                "Plancher intérieur": 2
+            },
+            "fullWidth": true
+        },
+        {
+            "key": "Globalementêtesvouss",
+            "label": "Globalement êtes vous satisfait(e) du résultat ?",
+            "data": {
+                "Oui mais avec réserves": 10,
+                "Oui": 7,
+                "Non": 4,
+                "j'ai pu reprendre mon travail ou travailler avec moins de douleurs": 2,
+                "L'opération m'a amélioré certains points mais m'a aussi causé des problèmes. Légère diplopie lorsque je lève légèrement les yeux . Ce n'est pas double mais tout est flou . Idem sur les côtes droite gauche .. J'ai une grosse tension derrière les yeux lorsque je les lève ou que je tourne les yeux a droite ou a gauche": 1
+            },
+            "fullWidth": false
+        },
+        {
+            "key": "Quandavezvousétéopér",
+            "label": "Quand avez vous été opéré?",
+            "data": {
+                "1 - 2 ans": 5,
+                "Moins d'un an": 5,
+                "Moins de 6 mois": 4,
+                "2 à 5 ans": 3,
+                "+ de 10 ans": 2,
+                "+ de 5 ans": 1
+            },
+            "fullWidth": false
+        },
+        {
+            "key": "Suiteàlopérationoule",
+            "label": "Suite à l'opération ou les opérations, arrivez-vous à dormir sans masque et sans souffrance au niveau des yeux?",
+            "data": {
+                "Oui": 11,
+                "Non": 8
+            },
+            "fullWidth": true
+        },
+        {
+            "key": "Estcequeçaamodifiéla",
+            "label": "Est-ce que ça a modifié l'apparence de votre peau sur le contour des yeux ?",
+            "data": {
+                "Oui (préciser dans autre)": 10,
+                "Non": 8,
+                "Oeil plus bas": 1,
+                "Yeux plus bas et paupières inférieures rétractées + paupieres sup. + larges": 1,
+                "Graisse dans les paupières": 1,
+                "devenues gonflées et pendantes": 1,
+                "Peau des paupières supérieures très relâchée.": 1,
+                "Des rides a cause des cicatrices": 1,
+                "J'ai moins cet aspect gonflé sous les sourcils": 1,
+                "Oeil opérer plus fermé. L autre oeil en récidive pour l instant en rétractation palpébrale avec injection de bótox en attendant que l opération soit possible": 1,
+                "Importante adhérences": 1,
+                "Plus de poche": 1
+            },
+            "fullWidth": true
+        },
+        {
+            "key": "Avezvousretrouvéunee",
+            "label": "Avez-vous retrouvé une esthétique qui vous convienne ?",
+            "data": {
+                "Je suis complexée par l'apparence de mes yeux": 13,
+                "J'ai retrouvé mon regard mais ce n'est pas parfait non plus": 5,
+                "Non c'est pire quavant l'opération": 3,
+                "Non c'est comme avant l'opération": 2,
+                "Je n'ai plus d'exophtalmie mais j'ai les os des arcades saillants": 1,
+                "j'ai le regard et le visage plat au niveau des yeux . Avant j'avais les yeux en amande": 1,
+                "aujourd'hui ils ne sont plus exophtalme mais ils restent plus  rond qu'avant .": 1,
+                "Car diplopie et strabisme suite à l’opération": 1,
+                "Je suis mitigée parce que la DO ne suffit pas. J'ai l'air moins \"malade\" mais la rétractation palpébrale me complexe encore un petit peu": 1,
+                "Oui j'ai retrouvé le même visage qu'avant ou presque": 1,
+                "Je n'ai pas terminé le parcours opérations": 1,
+                "le professeur Bouletreau m'avait expliqué que même si l'oeil retrouvait sa place dans l'orbite": 1,
+                "la rétraction de la paupière le ferait paraitre plus \" gros\" ( j'ai eu une decompression orbitaire sur l'oeil gauche uniquement)": 1,
+                "Non c'est un peu mieux qu'avant l'opération mais je ne suis pas satisfaite c'est beaucoup de souffrance pour pas grand chose": 1
+            },
+            "fullWidth": true
+        },
+        {
+            "key": "Souffrezvousdusyndrô",
+            "label": "Souffrez-vous du syndrôme des yeux secs?",
+            "data": {
+                "Oui": 19,
+                "Non": 2,
+                "Avant l'opération oui . Aujourd'hui je n'ai plus de problème": 1
+            },
+            "fullWidth": false
+        },
+        {
+            "key": "Vosyeuxsontilsplusou",
+            "label": "Vos yeux sont-ils plus ou moins secs depuis l'opération ?",
+            "data": {
+                "Pas de changement": 6,
+                "Plus": 5,
+                "Légère amélioration": 4,
+                "Moins": 3,
+                "Non concerné": 3,
+                "1 œil sec et 1 oeil normal": 1
+            },
+            "fullWidth": false
+        },
+        {
+            "key": "Niveaudiplopiestrabi",
+            "label": "Niveau diplopie/strabisme, avez vous eu une amélioration ?",
+            "data": {
+                "Je n'en ai jamais eu": 7,
+                "Ça a empiré": 5,
+                "Opération du strabisme à prévoir": 4,
+                "J'en avais et ça s'est amélioré": 1,
+                "On a du m'opérer pour strabisme suite à la décompression": 1,
+                "Aucune amélioration ni dégradation avant/après décompression": 1,
+                "J’ai eu le strabisme et la diplop Après l’opération": 1,
+                "Je n'avais pas de diplopie avant opé. Après ma 3 ème opération côté sinus": 1,
+                "c'est apparu.": 1
+            },
+            "fullWidth": true
+        },
+        {
+            "key": "Lapparencelaformedev",
+            "label": "L'apparence, la forme de vos paupières aujourd'hui est comment ?",
+            "data": {
+                "Paupières supérieures devenus larges/épaisses": 12,
+                "Paupières supérieures rétractées": 8,
+                "Paupières inférieures rétractées": 6,
+                "Scleral show (blanc de l'œil) prononcé (visible)": 4,
+                "Paupières sans soucis particuliers": 3
+            },
+            "fullWidth": true
+        },
+        {
+            "key": "Avezvouspourprojetde",
+            "label": "Avez-vous pour projet de vous faire à nouveau opérer ?",
+            "data": {
+                "Oui": 15,
+                "chirurgie palpébrale": 5,
+                "Je ne sais pas": 4,
+                "Non": 4,
+                "mais je ne sais pas quelle opération car mon cas est \"complexe\" d'après les médecins": 3,
+                "plus besoin": 2,
+                "lifting malaire": 2,
+                "plus confiance en nos chirurgiens": 2,
+                "blépharoplastie": 2,
+                "Peut être pour des retouches esthétique. Comblement pas acide hyaluronique ou gras pour cacher l'os saillant . Et pour redonner du volume afin de corriger le plat de mon visage .": 1,
+                "Pas d'autres opérations possibles": 1,
+                "Poches": 1,
+                "greffe palpébrale": 1,
+                "Strabisme / diplopie": 1,
+                "Opération prevue des paupieres mais refus du chirurgien avec comme indication": 1,
+                "ca saffaissera a 40 ans": 1,
+                "strabisme": 1,
+                "d’une décompression graisseuse uniquement": 1,
+                "Oui des paupières": 1,
+                "Plus d'opérations possibles": 1,
+                "Oui pour ma 1ère  décompression orbitaire": 1
+            },
+            "fullWidth": true
+        }
+    ],
+    "comparison": {
+        "labels": [
+            "Plancher latéral externe",
+            "Plancher inférieur (bas)",
+            "Latéral externe",
+            "Inférieur + lipectomie",
+            "Inférieur + externe",
+            "Supérieur + externe",
+            "Inférieur + externe (2 D.O.)",
+            "Lipectomie seule",
+            "Inférieur +supérieur +externe",
+            "Inférieur",
+            "Inférieur (1 œil opéré)",
+            "Inférieur"
+        ],
+        "before": [
+            21.0,
+            23.0,
+            25.0,
+            21.0,
+            33.0,
+            2.0,
+            28.0,
+            22.0,
+            25.0,
+            24.0,
+            22.0,
+            1.0
+        ],
+        "after": [
+            16.0,
+            21.0,
+            21.0,
+            18.0,
+            25.0,
+            1.0,
+            17.0,
+            17.0,
+            21.0,
+            21.0,
+            20.0,
+            1.0
+        ]
+    },
+    "grouped_comments": {
+        "Quels avantages avez-vous tiré de votre ou vos opérations ?": [
+            "Je n'ai plus les yeux qui me brûle constamment. Je peux de nouveau vivre sans lunette de soleil , je supporte la lumière du jour et lumière artificielle. C'est un point très positif.",
+            "Plus de graisse",
+            "Moins de compression et regard plus normal",
+            "Exophtalmie limitée",
+            "Rétablissement visuel car mon nerf optique était compresse",
+            "Aucun.",
+            "Les nerfs optiques libérés et œdèmes disparus",
+            "De retrouver un visage \" humain \" plus familier et mes anciennes connaissances me reconnaisse de nouveau",
+            "Je me sens un peu moins complexée avec mes yeux, j'y pense moins en société même si c'est encore un peu là",
+            "Retrouvé mon regard, moin de douleur, retrouve une dignité.",
+            "Ne jamais faire confiance aux chirurgiens. J’étais traité comme un rat de laboratoire.",
+            "Paupieres qui ferment bien la nuit, plus besoin de mettre de la crème dans les yeux chaque soir. Plus l'impression d'avoir le regard malade même si exophtalmie pas complètement disparue",
+            "Moins de kératites, confort esthétique",
+            "La pression ressentie dans l'oeil gauche a disparue, il y a moins d'excès de graisse sur la paupière supérieure ( même s'il en reste), les yeux sont moins secs",
+            "Cela a permis d’améliorer un de mes deux yeux qui était plus exorbité que l’autre, mais dans l’ensemble, j’ai toujours une exophtalmie bien qu’elle n’est pas forcément visible mais mes yeux sortent trop et j’ai d’ailleurs des sécheresses oculaires",
+            "Le seul « bénéfice » a été contraint : j’ai développé une vigilance extrême, une compréhension approfondie des erreurs médicales et la capacité de ne plus jamais faire confiance aveuglément au corps médical après ce que j’ai subi en France.",
+            "Plus de douleurs profondes",
+            "Nerf optique décoincé et vue améliorée"
+        ],
+        "Quels inconvénients ?": [
+            "L'évolution est longue ... On se retrouve avec d'autre problème... On espère retrouver notre regard d'avant , on mise tout sur cette opération pour en finir avec tout ces problèmes et tout ces complexes pour être tout de même déçu ... Même si il y a du mieux ... \n\nJ'ai également la peau qui est devenue très lâche sous les yeux ...",
+            "Oeil trop bas par rapport à l'autre",
+            "Mes yeux sont descendus et a cause de ça jai des problèmes aux paupieres",
+            "Suite a cette opération ulcère sur le cornée  qui ne guéri pas",
+            "Diplopie, paupières déformées",
+            "Pleurs très importants . Douleurs et un œil au \"beurre noir \" pendant plus de 15 jours",
+            "Strabisme /diplopie",
+            "J'ai l'impression que la forme de mon visage n'est plus la même",
+            "Le prix ! 1800€ je crois ? Ce n'est pas accessible à tous ! Et peu d'explications avec du recul.",
+            "Plusieurs complications après la chirurgie ( diplopie permanente, strabisme, limitations sévères)",
+            "Opération lourde, qui ne règle pas tout",
+            "La diplopie, existante avant la DO, a changé, l'oeil a repris sa place dans l'orbite mais de manière différente ( à cause des muscles oculomoteurs qui ont triplé de volume dans mon cas) et le prisme intégré au verre de lunettes n'est  plus adapté, pas d'autre alternative que d'attendre que le tout se stabilisé avant l'opération pour le strabisme,  dont le résultat n'est pas garanti: une opération ? Deux? Un nouveau prisme?...c'est long, inconfortable, invalidant ... et ça plombe le moral par moments",
+            "J’avais demandé au chirurgien de retirer la graisse derrière les yeux qui me cause l’exo. Il ne l’a pas fait car il dit que cela est trop délicat, par précaution il n’a que limer l’os latéral. Je vais devoir me refaire opérer afin d’avoir le rendu voulu",
+            "Des conséquences physiques, esthétiques et psychologiques lourdes, liées à une erreur médicale initiale et à des prises en charge successives inadaptées.\nAnnées de souffrance, interventions correctrices, perte de confiance dans la médecine française, fatigue mentale chronique et nécessité de me reconstruire seule face à des dommages que je n’aurais jamais dû subir.",
+            "Diplopie, asymétrie des paupières",
+            "Un oeil plus bas que l'autre"
+        ],
+        "Avez-vous des remarques ou choses à ajouter ?": [
+            "C'est une opération très lourde , on imagine pas a quel point ça peut être difficile.",
+            "J'aurais aimé être informée des différents type de DO et connaitre les inconvénients dun plancher orbitaire inferieur en moins",
+            "La maladie est très présente. Aucune confiance dans les médecins.  Même pas soucieux de surveiller ma vision.  Obligée de me \"battre \"pour voir régulièrement l'ophtalmo.",
+            "Opération qui devait durée 1h30 soit 45min par oeil mais qui a durée 3h soit 1h30 par œil.",
+            "Je me pose beaucoup de questions sur la prise en charge des verres correcteurs en cas de Basedow, j'avais vu, il y a quelque temps, écrit en tout petit sur un site ministériel, qu'en cas de Basedow il n'y avait pas de limitation sur une année sur le remboursement des équipements optiques ( en gros si j'avais bien compris, on pouvait avoir 1,2, 3, ... prescriptions remboursees dans l'année vs 1 tous les 2 ans normalement ?),  et j'ai la sensation qu'il y a une \" reticence\" de la part des ophtalmos qui nous suivent à prescrire quand il y a changement, avec comme arguments\" ça va bouger, il faut que ça se stabilise\", \" patientez encore 1 mois ou 2 jusqu'à l'opération\" je veux bien entendre ces arguments, mais je me demande s'il n'y a pas une injonction sur des \"economies\" pour la sécurité sociale ( les premiers prismes en press-on je les ai payés de ma poche, ça n'etait pas remboursé par la secu, je n'étais pas encore en ALD mais quand même c'est invraisemblable j'avais une prescription de l'hôpital..75 euros le prisme j'en ai eu besoin de 2, un pour la vision de loin, l'autre pour celle de près) et la cerise sur le gâteau, la semaine dernière consultation préopératoire pour le strabisme, pour prendre des mesures, chez une orthoptiste spécifique à la demande de la chirurgienne, elle contrôle la correction de ma vue en prenant la correction sur mes lunettes ( d'habitude ils contrôlent avec un appareil qui donne direct la correction et on m'a toujours dit 10/10 alors que dans la réalité je ne vois pas bien ... bon j'avais mis ça sur le compte du cerveau qui annule l'oeil gauche ) et là je vois rien ... elle me dit il n'y a pas10/10 j'ai 4/10 elle vérifie le courrier de la chirurgienne avec les mesures, elle me dit mais c'est pas la même chose que sur vos lunettes ( mes lunettes sont de février, je n'ai vu la chirurgienne qu'en septembre) donc, ma vue a changé à droite ( l'oeil censé bien voir) et on ne m'a proposé aucun changement de verre ... desolee, c'est long, peut-être brouillon et confus mais je suis dépitée ...",
+            "Ce parcours illustre des défaillances graves du système médical français : manque de reconnaissance des erreurs, absence de suivi adapté et abandon du patient face aux conséquences.\nJ’ai payé le prix fort d’erreurs que je n’ai pas commises, et cette expérience m’a définitivement appris que la médecine française n’est ni infaillible ni protectrice pour les patients victimes d’erreurs.",
+            "Suite à mon dernier bilan, exophtalmie bilatérale importante 28mm droit et 27 gauche. Rétractation palpébrale supérieure de  2 mm droit et 1 mm inférieur droit asymétrie d’ouverture palpébrale. Hypertrophie graisseuse rétro palpébrale 2 yeux."
+        ]
+    },
+    "stats": {
+        "total": 22,
+        "satisfaction": "15/22",
+        "dry_eyes": "20/22"
+    }
+};
+    
+    const palette = ["#E8A598", "#D4A574", "#C9B99A", "#A8D5E5", "#F4C2C2", "#D4B896", "#B8D4E3", "#E6C9A8", "#D4A5A5", "#C4D7E5", "#DEB887", "#E8D4C4", "#B5C7D3"];
+    
+    const grid = document.getElementById('grid');
+    data.charts.forEach((c, idx) => {
+        const card = document.createElement('div');
+        card.className = 'card' + (c.fullWidth ? ' full-width' : '');
+        card.innerHTML = `<h2>${c.label}</h2><div class="chart-container"><canvas id="${c.key}"></canvas></div>`;
+        grid.appendChild(card);
+        
+        if (c.label.includes("plus ou moins secs depuis l'opération")) {
+            const sec = document.getElementById('comparison-section');
+            sec.style.display = 'block';
+            grid.appendChild(sec.firstElementChild);
+        }
+
+        const isEdema = c.label.toLowerCase().indexOf('edema') > -1 || c.label.toLowerCase().indexOf('œdèmes') > -1;
+        const type = (Object.keys(c.data).length >= 4 || isEdema) ? 'bar' : 'pie';
+        
+        // Get colors for this chart (cycle through palette)
+        const chartColors = [];
+        const labels = Object.keys(c.data);
+        for (let i = 0; i < labels.length; i++) {
+            chartColors.push(palette[i % palette.length]);
+        }
+        
+        new Chart(document.getElementById(c.key), {
+            type: type,
+            data: {
+                labels: labels,
+                datasets: [{ 
+                    data: Object.values(c.data), 
+                    backgroundColor: chartColors,
+                    borderColor: '#FFFFFF',
+                    borderWidth: 2
+                }]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                indexAxis: type==='bar'?'y':'x',
+                plugins: { 
+                    legend: { 
+                        display: type==='pie', 
+                        position: 'bottom',
+                        labels: { 
+                            padding: 20,
+                            font: { size: 14 },
+                            color: '#4A4A4A'
+                        }
+                    }
+                },
+                scales: type === 'bar' ? {
+                    y: {
+                        grid: { display: false },
+                        ticks: { font: { size: 14 }, color: '#5A5A5A' }
+                    },
+                    x: {
+                        grid: { color: '#F0E6DC' },
+                        ticks: { font: { size: 14 }, color: '#5A5A5A' }
+                    }
+                } : {}
+            }
+        });
+    });
+
+    const table = document.getElementById('compTable');
+    data.comparison.labels.forEach((l, i) => {
+        const row = table.insertRow();
+        const b = data.comparison.before[i], a = data.comparison.after[i];
+        row.innerHTML = `<td>${b} mm</td><td>${a} mm</td><td>${l}</td>`;
+    });
+
+    const comms = document.getElementById('comments');
+    Object.entries(data.grouped_comments).forEach(([q, list]) => {
+        const div = document.createElement('div');
+        div.className = 'comment-group';
+        div.innerHTML = `<h2>${q}</h2>` + list.map(c => `<div class="comment-item">"${c}"</div>`).join('');
+        comms.appendChild(div);
+    });
+</script>
+</body>
+</html>

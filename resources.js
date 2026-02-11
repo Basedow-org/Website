@@ -18,6 +18,18 @@ const resourcesConfig = [
     {
         id: "decompression-orbitaire-retour-experience",
         file: "resources/decompression-orbitaire-retour-experience.md"
+    },
+    {
+        id: "dashboard-exophtalmie",
+        file: "resources/full_dashboard.html",
+        type: "html",
+        metadata: {
+            title: "Dashboard comparatif exophtalmie",
+            date: "2026-02-11",
+            summary: "Visualisation complète des résultats du sondage sur l’exophtalmie et la décompression orbitaire.",
+            categories: "Ophtalmologie, Chirurgie, Témoignage",
+            top: true
+        }
     }
 ];
 
@@ -153,6 +165,16 @@ function loadUsefulLinks() {
 
 async function loadResourceMeta(resource) {
     try {
+        if (resource.type === "html") {
+            return {
+                id: resource.id,
+                file: resource.file,
+                metadata: resource.metadata || {},
+                rawContent: "",
+                contentType: "html"
+            };
+        }
+
         // Get the base path for GitHub Pages compatibility
         const basePath = getBasePath();
         const resourcePath = `${basePath}${resource.file}`;
@@ -172,7 +194,8 @@ async function loadResourceMeta(resource) {
             id: resource.id,
             file: resource.file,
             metadata,
-            rawContent: content
+            rawContent: content,
+            contentType: "markdown"
         };
     } catch (error) {
         console.error('Error loading resource:', error);
@@ -383,7 +406,10 @@ function openResourceModal(resourceId) {
     resourcesState.activeId = resourceId;
 
     const title = item.metadata.title || formatTitleFromId(item.id);
-    const content = convertMarkdownToHtml(item.rawContent);
+    modalRoot.classList.toggle("resource-modal--fullscreen", item.contentType === "html");
+    const content = item.contentType === "html"
+        ? `<div class="resource-iframe-wrap"><iframe class="resource-iframe" src="${getBasePath()}${item.file}" title="${escapeHtml(title)}" loading="lazy"></iframe></div>`
+        : convertMarkdownToHtml(item.rawContent);
     
     modalBody.innerHTML = `
         <div class="resource-modal__header">
@@ -406,6 +432,7 @@ function closeResourceModal() {
     if (!modalRoot) return;
 
     modalRoot.setAttribute("aria-hidden", "true");
+    modalRoot.classList.remove("resource-modal--fullscreen");
     modalRoot.querySelector(".resource-modal__body").innerHTML = "";
     updateUrlWithResource(null);
 }

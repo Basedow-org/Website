@@ -799,6 +799,16 @@ nav {
     padding: 2.5rem;
 }
 
+.resource-modal--fullscreen .resource-modal__dialog {
+    width: min(96vw, 1400px);
+    max-height: 94vh;
+    padding: 2rem;
+}
+
+.resource-modal--fullscreen .resource-modal__content {
+    max-height: calc(94vh - 3rem);
+}
+
 .resource-modal__close {
     position: absolute;
     top: 1rem;
@@ -858,6 +868,22 @@ nav {
     width: 100%;
     border-collapse: collapse;
     min-width: 760px;
+}
+
+.resource-modal__body .resource-iframe-wrap {
+    width: 100%;
+    border: 2px solid var(--black);
+    background: var(--white);
+    box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.resource-modal__body .resource-iframe {
+    width: 100%;
+    height: min(82vh, 980px);
+    border: none;
+    display: block;
 }
 
 .resource-modal__body th,
