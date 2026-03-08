@@ -506,7 +506,7 @@ function convertMarkdownToHtml(markdown) {
                 html.push("<ul>");
                 inList = true;
             }
-            html.push(`<li>${escapeHtml(trimmed.substring(2).trim())}</li>`);
+            html.push(`<li>${formatInlineMarkdown(trimmed.substring(2).trim())}</li>`);
             return;
         }
 
@@ -515,7 +515,7 @@ function convertMarkdownToHtml(markdown) {
             inList = false;
         }
 
-        html.push(`<p>${escapeHtml(trimmed)}</p>`);
+        html.push(`<p>${formatInlineMarkdown(trimmed)}</p>`);
     });
 
     if (inList) {
@@ -523,6 +523,24 @@ function convertMarkdownToHtml(markdown) {
     }
 
     return html.join("\n");
+}
+
+function formatInlineMarkdown(text) {
+    const linkRegex = /\[([^\]]+)]\(([^)]+)\)/g;
+    let result = "";
+    let lastIndex = 0;
+    let match;
+
+    while ((match = linkRegex.exec(text)) !== null) {
+        const [fullMatch, label, url] = match;
+        const matchIndex = match.index;
+        result += escapeHtml(text.slice(lastIndex, matchIndex));
+        result += `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+        lastIndex = matchIndex + fullMatch.length;
+    }
+
+    result += escapeHtml(text.slice(lastIndex));
+    return result;
 }
 
 function formatTitleFromId(id) {

@@ -231,7 +231,7 @@ nav {
 
 .video-thumbs-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(220px, 360px));
+    grid-template-columns: repeat(3, minmax(220px, 320px));
     gap: 2rem;
     justify-content: center;
 }
