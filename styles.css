@@ -82,9 +82,29 @@ nav {
     opacity: 0.6;
 }
 
+.header-separator {
+    width: 50%;
+    margin: 0 auto;
+    border: none;
+    border-top: 1px solid var(--black);
+    margin-bottom: 0.6rem;
+}
+
+.header-tagline {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem 0.9rem;
+    margin-top: 0.6rem;
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-style: italic;
+    color: var(--black);
+}
+
 /* Hero Section */
 .hero {
-    margin-top: 100px;
+    margin-top: 130px;
     min-height: 50vh;
     display: flex;
     align-items: center;
@@ -1050,7 +1070,7 @@ html {
 }
 
 section {
-    scroll-margin-top: 100px;
+    scroll-margin-top: 130px;
 }
 
 /* Footer Styles */

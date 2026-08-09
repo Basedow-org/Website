@@ -1,13 +1,5 @@
 const resourcesConfig = [
     {
-        id: "introduction",
-        file: "resources/introduction.md"
-    },
-    {
-        id: "soutien",
-        file: "resources/soutien.md"
-    },
-    {
         id: "tableau-greffes-paupiere",
         file: "resources/tableau_greffes_paupiere.md"
     },
