@@ -17,6 +17,14 @@ async function loadHeader() {
             container.innerHTML = headerHTML;
             initializeHeader(container);
         });
+
+        if (!document.querySelector('[data-goatcounter]')) {
+            const gcScript = document.createElement('script');
+            gcScript.setAttribute('data-goatcounter', 'https://basedow.goatcounter.com/count');
+            gcScript.async = true;
+            gcScript.src = '//gc.zgo.at/count.js';
+            document.head.appendChild(gcScript);
+        }
     } catch (error) {
         console.error(error);
     }
