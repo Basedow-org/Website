@@ -86,6 +86,10 @@
             box-shadow: 8px 8px 0 var(--black);
         }
 
+        .leaflet-tile-pane {
+            filter: grayscale(1);
+        }
+
         .doctors-list {
             height: 600px;
             overflow-y: auto;
@@ -226,11 +230,10 @@
         function initMap() {
             map = L.map('map').setView([46.603354, 1.888334], 5); // Center of France
             
-            // Use CartoDB Positron for clean black & white style
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-                subdomains: 'abcd',
-                maxZoom: 20
+            // OpenStreetMap standard tiles (no API key required)
+            L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                maxZoom: 19
             }).addTo(map);
 
             markersLayer = L.layerGroup().addTo(map);
